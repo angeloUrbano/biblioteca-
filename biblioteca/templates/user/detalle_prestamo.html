@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Biblioteca.dev | Listado de Prestamos
+{% endblock titulo %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+<head>
+	<title>Prestamo</title>
+</head>
+<body>
+
+{% block body %}
+
+
+
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-8">
+        <strong class="card-title">Datos del cliente!</strong>
+      </div>
+      <div class="col-md-4">
+        <a href="#" class="btn btn-primary">Pagina Pincipal</a>
+        
+      </div>
+    </div>
+
+  </div>
+  <div class="table-stats order-table ov-h">
+    <table id="tabla_autores" class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido </th>
+           <th>Email </th>
+           <th>Telefono</th>
+          
+          <th>Creado</th>
+          <th>Modificado</th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+  
+      
+      <tr>
+        
+
+        <td>{{object.user_id.first_name}}</td>
+        <td>{{object.user_id.last_name}}</td>
+        <td>{{object.user_id.email}}</td>
+        <td>{{object.user_id.phone_number}}</td>
+        
+        <td>{{object.user_id.create}}</td>
+        <td>{{object.user_id.modified}}</td>
+      
+
+          </tr>
+
+          
+
+
+      </tbody>
+    </table>
+
+    <div class="col-md-8">
+        <strong class="card-title">Datos del Libro!</strong>
+      </div>
+
+
+
+    <table id="tabla_autores" class="table">
+      <thead>
+        <tr>
+          <th>Titulo de libro </th>
+          <th>Cantidad </th>
+          <th>Cantidad </th>
+           
+        </tr>
+      </thead>
+
+
+      <tbody>
+  
+      
+      <tr>
+        {% for book in object.libro_id.all%}
+
+            <td>{{book}}</td>
+            <td>{{book.create}}</td>
+            <td>{{book.cantidad_existente}}</td>
+
+
+
+        {% endfor %}
+        
+
+       
+
+          </tr>
+
+          
+
+
+      </tbody>
+    </table>
+
+
+
+
+    <div class="col-md-8">
+        <strong class="card-title">Datos del Prestamo!</strong>
+      </div>
+
+
+
+    <table id="tabla_autores" class="table">
+      <thead>
+        <tr>
+          <th># </th>
+          <th>Creado</th>
+          <th>modificado </th>
+          <th>Prestado</th>
+          <th>Entregado </th>
+          <th>Accion </th>
+
+           
+        </tr>
+      </thead>
+
+
+      <tbody>
+  
+      
+      <tr>
+
+        
+       
+        
+        <td>{{object.id}}</td>
+        <td>{{object.created}}</td>
+        <td>{{object.modified}}</td>
+        <td>{{object.libro_prestado}}</td>
+        <td>{{object.libro_entregado}}</td>
+        <td>
+          
+        <a href="{% url 'usuario:update_estado_prestamo' object.id%}" class="btn btn-success">Detalle</a>
+
+        </td>
+       
+        
+
+       
+
+          </tr>
+
+          
+
+
+      </tbody>
+    </table>
+
+
+
+{% endblock body %}
+
+
+{% block extrajs %}
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'js/libro/libro.js' %}"></script>
+{% endblock extrajs %}

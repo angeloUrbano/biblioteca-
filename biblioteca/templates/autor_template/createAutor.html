@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Biblioteca.dev | Crear Autores
+{% endblock titulo %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+{% block body %}
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-8">
+        <strong class="card-title">Crear de Autor</strong>
+      </div>
+
+	<form method="POST">
+            {% csrf_token %}
+            <div class="modal-body">
+                <div id="errores"> 
+
+                </div>
+                {{ form.as_p }}
+            </div>
+            <div class="modal-footer">
+            	<a href="{% url 'libro:list_autor'%}" class="btn btn-danger">Cancelar</a>
+                
+                <button class="btn btn-primary" type="submit"
+                    >Confirmar</button>
+            </div>
+        </form>
+
+	
+
+
+
+{% endblock body %}
+{% block extrajs %}
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'js/libro/libro.js' %}"></script>
+{% endblock extrajs %}

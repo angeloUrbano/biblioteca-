@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+{% block body %}
+
+		<form method="post">
+
+			{% csrf_token %}
+
+			<h1> ¿Desea eliminar {{object.titulo}}?</h1>
+
+			<button type="submit">eliminar {{object.id}}</button>
+			<a href="{% url 'libro:list_book' %}">Cancelar </a>
+			
+
+
+
+		</form>
+
+
+
+
+
+
+
+{% endblock body %}

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Biblioteca.dev | Prestamo
+{% endblock titulo %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+{% block body %}
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-8">
+        <strong class="card-title">Prestamo</strong>
+      </div>
+      <div class="col-md-4">
+        <a href="#" class="btn btn-primary">Pagina Pincipal</a>
+        
+      </div>
+    </div>
+
+  </div>
+  <div class="table-stats order-table ov-h">
+<table id="tabla_autores" class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Titulo</th>
+          <th>Cantidad de Libros</th>
+          <th>Autor</th>
+          
+          <th> Registro Creado</th>
+          <th> Registro Modificado</th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+        
+      
+      <tr>
+        
+
+        <td>{{object.id}}</td>
+        <td>{{object.titulo}}</td>
+        <td>{{object.cantidad_existente}}</td>
+        <td>
+
+            {% for book in object.autor_id.all %}
+
+
+
+              <li>{{book.nombre}}</li>
+
+
+              </td>
+            {% endfor %}
+
+            <td>{{object.creado}}</td>
+            <td>{{object.modified}}</td>
+        
+
+           
+
+
+          </tr>
+
+          
+
+
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+</div>
+
+
+	
+  <h1>{{no_hay}}</h1>
+
+
+
+	<form method="POST">
+            {% csrf_token %}
+            <div class="modal-body">
+                <div id="errores"> 
+
+                </div>
+                {{ form.as_p }}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="submit" >Cancelar</button>
+                <button class="btn btn-primary" type="submit"
+                    >Confirmar</button>
+            </div>
+        </form>
+
+
+          
+
+
+      
+
+{% endblock body %}

@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+{% block body %}
+
+
+
+<div class="container">
+                        <div class="row">
+                            <div class="col-md-12 search">
+                                <form method="get">
+                                    <div id="custom-search.input">
+                                        <div class="input-group col-md-12">
+                                            <input type="text" class="form-control" placeholder="Buscar libro..." name="buscar" value="{{request.GET.buscar}}">
+                                            <span class="input-group-list"></span>
+                                            <i class=" icon icon-search"></i>
+                                            <button type="submit" class="boton btn-success ">Buscar</button>
+
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </form>
+                                
+                            </div>
+                            
+                        </div>
+                        
+
+                    </div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-8">
+        <strong class="card-title">Listado de Libros</strong>
+      </div>
+      
+    </div>
+
+  </div>
+  <div class="table-stats order-table ov-h">
+    <table id="tabla_autores" class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Titulo</th>
+          <th>Cantidad de Libros</th>
+          <th>Autor</th>
+          
+          <th>Opciones</th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+        {% if books %}
+		{% for  book in books %}
+			
+			<tr>
+				
+
+				<td>{{book.id}}</td>
+				<td>{{book.titulo}}</td>
+				<td>{{book.cantidad_existente}}</td>
+				<td>
+
+						{% for book in book.autor_id.all %}
+
+
+
+							<li>{{book.nombre}}</li>
+
+
+							</td>
+						{% endfor %}
+				<td>
+					<a href="{% url 'libro:prestamo' book.id %}" class="btn btn-success">Prestamo</a>
+					
+					<a href="{% url 'libro:update_book' book.id %}" class="btn btn-primary">Editar</a>
+					<a href="{% url 'libro:delete_book' book.id %}" class="btn btn-danger">Eliminar</a>
+
+				</td>		
+
+			{% endfor %}
+
+
+			{% else %}
+
+					<h1> No hay libro registrado!</h1>
+
+			{% endif %}	
+
+
+          </tr>
+
+          
+
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+</div>
+</div>
+
+                      <div  class="col-md-12 col-lg12 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 float-right">
+                        {% if books.has_previous %}
+                        <p class="text-white-75 font-weight-light mb-5"></p>
+                        <a class="btn btn-primary btn-xl js-scroll-trigger" href="?page={{books.previous_page_number}}"> Pagina Anterior</a>
+                        
+                        {% endif %}
+                        
+                    </div>
+                    </div>
+
+
+                    <div  class="col-md-12 col-lg12 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 float-right">
+                        {% if books.has_next %}
+                        <p class="text-white-75 font-weight-light mb-5"></p>
+                        <a class="btn btn-primary btn-xl js-scroll-trigger" href="?page={{books.next_page_number}}">Siguiente Pagina</a>
+                        
+                        {% endif %}
+                    </div>
+                    </div>
+                  
+
+
+
+
+
+{% endblock body %}
+
+
+                  
+
+
+
+{% block extrajs %}
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'js/libro/libro.js' %}"></script>
+{% endblock extrajs %}

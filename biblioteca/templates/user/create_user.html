@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Biblioteca.dev | Listado de Prestamos
+{% endblock titulo %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+{% block body %}
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-8">
+        <strong class="card-title">Listado de Prestamos</strong>
+      </div>
+      <div class="col-md-4">
+        <a href="#" class="btn btn-primary">Pagina Pincipal</a>
+        
+      </div>
+    </div>
+
+  </div>
+  <div class="table-stats order-table ov-h">
+    <table id="tabla_autores" class="table">
+      <thead>
+        <tr>
+        
+          <th>#</th>
+          <th>Nombre </th>
+           <th>apellido </th>
+           <th>Email</th>
+           <th>Telefono</th>
+           <th>Creado</th>
+           <th>Modificado</th>
+          
+          <th>Opciones</th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+        {% if list_user %}
+        {% for  usuario in list_user %}
+            
+            <tr>
+                
+
+                <td>{{usuario.id}}</td>
+        <td>{{usuario.first_name}}</td>
+        <td>{{usuario.last_name}}</td>
+        <td>{{usuario.email}}</td>
+        <td>{{usuario.phone_number}}</td>        
+        <td>{{usuario.create}}</td>
+        <td>{{usuario.modified}}</td>
+                
+                    
+                <td>
+          
+          
+          
+          <a href="{% url 'usuario:update_user' usuario.id %}" class="btn btn-primary">Editar</a>
+          <a href="{% url 'usuario:delete_user' usuario.id %}" class="btn btn-danger">Eliminar</a>
+
+        </td>   
+
+            {% endfor %}
+
+
+            {% else %}
+
+                    <h1> No hay usuarios registrado!</h1>
+
+            {% endif %} 
+
+
+          </tr>
+
+          
+
+
+      </tbody>
+    </table>
+    <P></P>
+    <P></P>
+    
+    
+  </div>
+</div>
+</div>
+</div>
+
+
+
+	<form method="POST">
+            {% csrf_token %}
+            <div class="modal-body">
+                <div id="errores"> 
+
+                </div>
+                {{ form.as_p }}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="submit" >Cancelar</button>
+                <button class="btn btn-primary" type="submit"
+                    >Confirmar</button>
+            </div>
+        </form>
+
+	
+
+
+
+{% endblock body %}
+{% block extrajs %}
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'js/libro/libro.js' %}"></script>
+{% endblock extrajs %}

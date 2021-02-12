@@ -1,0 +1,93 @@
+
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+{% block body %}
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-8">
+        <strong class="card-title">Listado de Autores</strong>
+      </div>
+      <div class="col-md-4">
+        <a href="#" class="btn btn-primary">Pagina Pincipal</a>
+        
+      </div>
+    </div>
+
+  </div>
+  <div class="table-stats order-table ov-h">
+    <table id="tabla_autores" class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Descripcion</th>
+          
+          <th>Opciones</th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+        {% if object_list %}
+		{% for  autor in object_list %}
+			
+			<tr>
+				
+
+				<td>{{autor.id}}</td>
+				<td>{{autor.nombre}}</td>
+				<td>{{autor.apellido}}</td>
+				<td>{{autor.descripcion}}</td>
+
+				<td>
+					
+					<a href="{% url 'libro:update_autor' autor.id %}" class="btn btn-primary">Editar</a>
+					<a href="{% url 'libro:delete_autor' autor.id %}" class="btn btn-danger">Eliminar</a>
+
+
+				</td>
+				
+
+					
+			{% endfor %}
+
+
+			{% else %}
+
+					<h1> ¡No hay autor registrado!</h1>
+
+			{% endif %}	
+
+          </tr>
+
+          
+
+
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+{% endblock body %}
+
+{% block extrajs %}
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'js/libro/libro.js' %}"></script>
+{% endblock extrajs %}	
+

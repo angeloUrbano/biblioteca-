@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Biblioteca.dev | Prestamo
+{% endblock titulo %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %} 
+{% block body %}
+
+
+
+
+
+
+<div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-6 pt-3 pb-3" id="profile-box">
+                <h4 class="mb-4">¡Escriba los datos del libro  !</h4>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <input
+                            class="form-control"
+                            type="text"
+                            name="asunto"
+                            placeholder="Titulo del libro "
+                        >
+                        
+
+                    </div>
+                    <div class="form-group">
+                        <input
+                            class="form-control"
+                            type="text"
+                            name="Autor"
+                            placeholder="Nombre de Autor "
+                        >
+                        
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <input
+                            class="form-control"
+                            type="number"
+                            name="cantidad"
+                            placeholder="Cantidad solicidata "
+                        >
+                        
+
+                    </div>
+
+
+
+                    
+
+
+
+                  <div class="form-group">
+                        <textarea
+                            class="form-control"
+                            type="text"
+                            name="mensaje"
+                            placeholder="Descripcion....."
+                        ></textarea>
+                        
+
+                    </div>
+
+                    
+                    <button type="submit" class="btn btn-primary btn-block mt-5">
+                    Realizar Senso!</button>
+                    <a href="# " class="btn btn-danger btn-block mt-5">Cancelar Senso!</a>
+                </form>
+            </div>
+        </div>
+    </div> 
+
+
+
+	
+  
+
+
+      
+
+{% endblock body %}
