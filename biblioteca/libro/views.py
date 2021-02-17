@@ -1,9 +1,9 @@
 from django.shortcuts import render , redirect
 from django.urls import reverse_lazy
 from django.views.generic import View , DetailView ,TemplateView , ListView , UpdateView ,CreateView , DeleteView
-from libro.forms import Create_Book_form , Autor_Create_form , PrestamoForm
+from libro.forms import Create_Book_form , Autor_Create_form , PrestamoForm , reservationForm
 from usuario.forms import UserCreateForm 
-from libro.models import Libro , Autor  , Prestamo
+from libro.models import Libro , Autor  , Prestamo  , reservation
 from usuario.models import Profile
 from django.core.paginator import Paginator
 
@@ -240,7 +240,7 @@ class Prestamo(DetailView):
 			
 			#print(info_prestamo)
 			#if self.kwargs['pk']
-			profile = self.third_model()
+			#profile = self.third_model()
 
 			
 		
@@ -260,7 +260,57 @@ class Prestamo(DetailView):
 			#salvando=  self.third_model.objects.create(profile)
 		else:
 
-			return redirect('libro:list_book')		
+			return redirect('libro:list_book')	
+
+
+class Create_request_Book(CreateView):
+	model = reservation
+	second_model = Profile
+	form_class = reservationForm
+	template_name='usuario_template/reservation.html'
+	success_url=reverse_lazy('libro:list_book')
+
+
+
+
+	def get(self , request , *args , **kwargs):
+	
+		form= reservationForm()
+
+		return render(request , 'usuario_template/reservation.html' ,{'form':form})
+
+
+	def post(self , request , *args , **kwargs):
+
+		form = reservationForm(request.POST)
+
+		save_reservation = self.model()
+		print(form)
+		#import pdb;pdb.set_trace()
+
+		if form.is_valid():
+			print("aquiiiii")
+			person = self.second_model.objects.get(id = request.user.profile.pk)
+
+			data= form.cleaned_data
+
+			save_reservation.user_id= person
+			save_reservation.titulo_libro= data['titulo_libro']
+			save_reservation.autor_libro= data['autor_libro']
+			save_reservation.cantidad_solicitada= data['cantidad_solicitada']
+			save_reservation.descripcion= data['descripcion']
+
+			save_reservation.save()
+
+			return redirect('usuario:List_prestamo')
+
+
+			
+
+
+
+
+		
 			
 
 			

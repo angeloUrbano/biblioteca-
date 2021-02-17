@@ -21,11 +21,15 @@ Biblioteca.dev | Prestamo
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
 
+                    <input type="hidden" name="profile" value="{{ profile.pk }}" />
+
+                    
+
                     <div class="form-group">
                         <input
                             class="form-control"
                             type="text"
-                            name="asunto"
+                            name="titulo_libro"
                             placeholder="Titulo del libro "
                         >
                         
@@ -35,7 +39,7 @@ Biblioteca.dev | Prestamo
                         <input
                             class="form-control"
                             type="text"
-                            name="Autor"
+                            name="autor_libro"
                             placeholder="Nombre de Autor "
                         >
                         
@@ -47,7 +51,7 @@ Biblioteca.dev | Prestamo
                         <input
                             class="form-control"
                             type="number"
-                            name="cantidad"
+                            name="cantidad_solicitada"
                             placeholder="Cantidad solicidata "
                         >
                         
@@ -64,7 +68,7 @@ Biblioteca.dev | Prestamo
                         <textarea
                             class="form-control"
                             type="text"
-                            name="mensaje"
+                            name="descripcion"
                             placeholder="Descripcion....."
                         ></textarea>
                         
@@ -73,7 +77,7 @@ Biblioteca.dev | Prestamo
 
                     
                     <button type="submit" class="btn btn-primary btn-block mt-5">
-                    Realizar Senso!</button>
+                    Realizar Reserva!</button>
                     <a href="# " class="btn btn-danger btn-block mt-5">Cancelar Senso!</a>
                 </form>
             </div>

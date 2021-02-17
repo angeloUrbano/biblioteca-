@@ -45,8 +45,19 @@ class Prestamo(models.Model):
 
 
 class reservation(models.Model):
-	libro_id= models.ForeignKey(Libro , on_delete=models.CASCADE)
+
+	
 	user_id =  models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+	titulo_libro= models.CharField(max_length=200 , blank= False , null = False)
+	
+	cantidad_solicitada= models.IntegerField() 
+	descripcion= models.TextField(blank=False , null=False)
+	autor_libro= models.CharField(max_length=200 , blank= False , null = True)
+	creado = models.DateTimeField(auto_now_add=True)
+	modified= models.DateTimeField(auto_now= True)
+	estado = models.BooleanField('estado' , default=True)
+
 
 
 

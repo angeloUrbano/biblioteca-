@@ -83,3 +83,20 @@ class PrestamoForm(forms.ModelForm):
 
 		fields=('libro_id' , 'user_id' )
 
+
+
+
+
+
+
+class reservationForm(forms.Form):
+
+
+	
+	titulo_libro= forms.CharField(max_length=200 )
+	cantidad_solicitada = forms.IntegerField()
+	autor_libro= forms.CharField(min_length=2 , max_length=200)
+	descripcion = forms.CharField( max_length=200)
+	
+
+
