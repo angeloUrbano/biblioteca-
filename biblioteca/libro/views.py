@@ -286,6 +286,8 @@ class Create_request_Book(CreateView):
 	def get(self , request , *args , **kwargs):
 	
 		form= reservationForm()
+		print(form)
+		print("estoy en la funcion get")
 
 		return render(request , 'usuario_template/reservation.html' ,{'form':form})
 
@@ -315,9 +317,12 @@ class Create_request_Book(CreateView):
 			return redirect('libro:success_reservation')
 		else:
 			#import pdb;pdb.set_trace()
-			form = self.form_class
+			
 
-		return render(request , 'usuario_template/reservation.html' )
+			print(form.errors)
+			print("estoy en la funcion get")	
+
+			return render(request , 'usuario_template/reservation.html' ,  {'form':form} )
 
 
 			 

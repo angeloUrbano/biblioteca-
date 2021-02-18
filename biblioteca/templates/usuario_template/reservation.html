@@ -20,8 +20,13 @@ Biblioteca.dev | Prestamo
 
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    
+                        {% if form.titulo_libro.errors %}
+
                         {% for error in form.titulo_libro.errors %}{{ error }}{%endfor %}
+
+                        {% endif %}
+                        
+                        
                         
                        
                         
@@ -40,6 +45,12 @@ Biblioteca.dev | Prestamo
                         
 
                     </div>
+                    {% if form.titulo_libro.errors %}
+
+                        {% for error in form.autor_libro.errors %}{{ error }}{%endfor %}
+
+                    {% endif %}
+
                     <div class="form-group">
                         <input
                             class="form-control"
@@ -51,7 +62,11 @@ Biblioteca.dev | Prestamo
 
                     </div>
 
+                    {% if form.titulo_libro.errors %}
 
+                        {% for error in form.cantidad_solicitada.errors %}{{ error }}{%endfor %}
+
+                        {% endif %}
                     <div class="form-group">
                         <input
                             class="form-control"
@@ -65,7 +80,11 @@ Biblioteca.dev | Prestamo
 
 
 
-                    
+                    {% if form.titulo_libro.errors %}
+
+                        {% for error in form.descripcion.errors %}{{ error }}{%endfor %}
+
+                        {% endif %}
 
 
 
