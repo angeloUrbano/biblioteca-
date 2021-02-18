@@ -20,6 +20,11 @@ Biblioteca.dev | Prestamo
 
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
+                    
+                        {% for error in form.titulo_libro.errors %}{{ error }}{%endfor %}
+                        
+                       
+                        
 
                     <input type="hidden" name="profile" value="{{ profile.pk }}" />
 

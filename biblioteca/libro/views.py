@@ -271,6 +271,16 @@ class Create_request_Book(CreateView):
 	success_url=reverse_lazy('libro:list_book')
 
 
+	def  get_context_data(self , **kwargs):
+
+		context = super().get_context_data(**kwargs)
+
+		context['form']= self.form
+
+
+		return context
+
+
 
 
 	def get(self , request , *args , **kwargs):
@@ -285,11 +295,11 @@ class Create_request_Book(CreateView):
 		form = reservationForm(request.POST)
 
 		save_reservation = self.model()
-		print(form)
+		
 		#import pdb;pdb.set_trace()
 
 		if form.is_valid():
-			print("aquiiiii")
+			
 			person = self.second_model.objects.get(id = request.user.profile.pk)
 
 			data= form.cleaned_data
@@ -302,7 +312,24 @@ class Create_request_Book(CreateView):
 
 			save_reservation.save()
 
-			return redirect('usuario:List_prestamo')
+			return redirect('libro:success_reservation')
+		else:
+			#import pdb;pdb.set_trace()
+			form = self.form_class
+
+		return render(request , 'usuario_template/reservation.html' )
+
+
+			 
+
+			
+
+
+class show_success_reservation (TemplateView):
+
+	template_name = 'usuario_template/success_reservation.html'
+
+
 
 
 			

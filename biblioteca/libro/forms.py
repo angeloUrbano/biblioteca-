@@ -97,6 +97,25 @@ class reservationForm(forms.Form):
 	cantidad_solicitada = forms.IntegerField()
 	autor_libro= forms.CharField(min_length=2 , max_length=200)
 	descripcion = forms.CharField( max_length=200)
+
+
+
+
+	def clean(self):
+		data = super().clean()
+		print(data)
+		print(len(data))
+
+
+
+		if len(data)<2 :
+			print("aqui en el raise")
+			raise forms.ValidationError('En los campos Titulo y Autor debe haber informacion')
+			print("aqui en el raise")
+		return data	
+
+
+
 	
 
 
