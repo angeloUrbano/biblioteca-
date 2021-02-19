@@ -1,7 +1,7 @@
 from django.urls import path 
 from .views import  ( inicio ,CreateBook  , success , ListBook , updateBook , DeleteBook , 
 	CreateAutor , ListAutor , updateAutor , DeleteAutor , Prestamo , Create_request_Book,
-    show_success_reservation)
+    show_success_reservation , list_reservation_active , sent_email_to_user)
 
 urlpatterns = [
 
@@ -32,7 +32,9 @@ urlpatterns = [
     path('Prestamo/<int:pk>' , Prestamo.as_view() , name='prestamo'),
     path('reservacion/' , Create_request_Book.as_view() , name='reservation'),
     path('success_reservation/' , show_success_reservation.as_view() , name='success_reservation'),
+    path('lista_reservacion_activa/' , list_reservation_active.as_view() , name='success_reservation'),
 
+    path('Email/<int:pk>' , sent_email_to_user.as_view() , name='Email'),
 
 
 
@@ -43,32 +45,3 @@ urlpatterns = [
 
 
 
-"""if request.method =='POST':
-
-        form = reservationForm(request.POST)
-
-        save_reservation = reservation()
-        
-        #import pdb;pdb.set_trace()
-
-        if form.is_valid():
-            
-            person = Profile.objects.get(id = request.user.profile.pk)
-
-            data= form.cleaned_data
-
-            save_reservation.user_id= person
-            save_reservation.titulo_libro= data['titulo_libro']
-            save_reservation.autor_libro= data['autor_libro']
-            save_reservation.cantidad_solicitada= data['cantidad_solicitada']
-            save_reservation.descripcion= data['descripcion']
-
-            save_reservation.save()
-
-            return redirect('libro:success_reservation')
-    else:
-        form= reservationForm()
-         
-    print(form.errors)
-    return render(request , 'usuario_template/reservation.html' , {'form':form })"""
- 

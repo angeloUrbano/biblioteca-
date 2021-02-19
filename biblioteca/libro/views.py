@@ -336,6 +336,40 @@ class show_success_reservation (TemplateView):
 
 
 
+class list_reservation_active(ListView):
+
+	model = reservation
+	template_name = 'usuario_template/list_reservation_active.html'
+
+
+
+class sent_email_to_user(DetailView):
+
+
+	model = reservation
+	template_name= 'usuario_template/Email.html'
+	pk_url_kwarg= 'pk'
+	queryset= model.objects.all()
+
+
+
+	def post(self , request , *args , **kwargs):
+
+
+
+		subjects= request.POST["asunto"]
+
+		message= request.POST["mensaje"] + " " + request.POST["email"]
+		email_from=settings.EMAIL_HOST_USER
+
+		RECIPIENT_LIST=["coroemma@hotmail.com" , "trabajofiends@gmail.com"]
+
+		send_mail(subjects , message , email_from , RECIPIENT_LIST)
+
+		return render(request , "post/gracias.html")
+	
+	return render(request, "post/contacto.html")
+
 
 			
 
