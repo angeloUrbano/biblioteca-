@@ -1,7 +1,8 @@
 from django.urls import path 
 from .views import  ( inicio ,CreateBook  , success , ListBook , updateBook , DeleteBook , 
 	CreateAutor , ListAutor , updateAutor , DeleteAutor , Prestamo , Create_request_Book,
-    show_success_reservation , list_reservation_active , sent_email_to_user)
+    show_success_reservation , list_reservation_active , sent_email_to_user,
+    list_reservation_no_active , reservation_usuario_active)
 
 urlpatterns = [
 
@@ -32,7 +33,9 @@ urlpatterns = [
     path('Prestamo/<int:pk>' , Prestamo.as_view() , name='prestamo'),
     path('reservacion/' , Create_request_Book.as_view() , name='reservation'),
     path('success_reservation/' , show_success_reservation.as_view() , name='success_reservation'),
-    path('lista_reservacion_activa/' , list_reservation_active.as_view() , name='success_reservation'),
+    path('lista_reservacion_activa/' , list_reservation_active.as_view() , name='lista_activa'),
+    path('lista_reservacion_no_activa/' , list_reservation_no_active.as_view() , name='lista__no_activa'),
+    path('reservacion_usuario_activa/' , reservation_usuario_active.as_view() , name='lista__usuario_activa'),
 
     path('Email/<int:pk>' , sent_email_to_user.as_view() , name='Email'),
 

@@ -7,6 +7,10 @@ from libro.models import Libro , Autor  , Prestamo  , reservation
 from usuario.models import Profile
 from django.core.paginator import Paginator
 
+
+from django.conf import settings
+from django.core.mail import send_mail
+
 # Create your views here.
 
 
@@ -314,7 +318,7 @@ class Create_request_Book(CreateView):
 
 			save_reservation.save()
 
-			return redirect('libro:success_reservation')
+			return redirect('libro:lista__usuario_activa')
 		else:
 			#import pdb;pdb.set_trace()
 			
@@ -340,6 +344,31 @@ class list_reservation_active(ListView):
 
 	model = reservation
 	template_name = 'usuario_template/list_reservation_active.html'
+	queryset = model.objects.filter(estado = True )
+
+
+class reservation_usuario_active(ListView):
+
+	model = reservation
+	template_name = 'usuario_template/list_reservation_para_usuario_active.html'
+	#queryset = model.objects.filter(estado = True )
+
+
+
+	def get_context_data(self , **kwargs):
+
+		context = super().get_context_data(**kwargs)
+		
+		context['date'] = self.model.objects.filter(user_id= self.request.user.profile, estado = True )
+
+		return context
+
+
+class list_reservation_no_active(ListView):
+
+	model = reservation
+	template_name = 'usuario_template/list_reservation_no_activa.html'
+	queryset = model.objects.filter(estado = False )	
 
 
 
@@ -351,24 +380,33 @@ class sent_email_to_user(DetailView):
 	pk_url_kwarg= 'pk'
 	queryset= model.objects.all()
 
-
+	
 
 	def post(self , request , *args , **kwargs):
+
+		var = self.model.objects.get(id = self.kwargs['pk'])
+
+
+
 
 
 
 		subjects= request.POST["asunto"]
 
-		message= request.POST["mensaje"] + " " + request.POST["email"]
+		message= request.POST["mensaje"] 
 		email_from=settings.EMAIL_HOST_USER
 
-		RECIPIENT_LIST=["coroemma@hotmail.com" , "trabajofiends@gmail.com"]
+		RECIPIENT_LIST=[var.user_id.email]
 
 		send_mail(subjects , message , email_from , RECIPIENT_LIST)
 
-		return render(request , "post/gracias.html")
+		var.estado = False
+
+		var.save()
+		return redirect('libro:lista_activa')
+
+		
 	
-	return render(request, "post/contacto.html")
 
 
 			
