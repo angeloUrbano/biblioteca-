@@ -1,5 +1,5 @@
 from django.db import models
-from usuario.models import Profile
+from usuario.models import Profile , datos_prestamo_manejado_por_staff
 
 # Create your models here.
 
@@ -36,7 +36,7 @@ class Libro(models.Model):
 class Prestamo(models.Model):
 
 	libro_id= models.ManyToManyField(Libro)
-	user_id =  models.ForeignKey(Profile, on_delete=models.CASCADE)
+	user_id =  models.ForeignKey(datos_prestamo_manejado_por_staff, on_delete=models.CASCADE)
 	created= models.DateTimeField(auto_now_add=True)
 	modified= models.DateTimeField(auto_now= True)
 	libro_prestado =models.BooleanField(default=True)

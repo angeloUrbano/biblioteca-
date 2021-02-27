@@ -27,18 +27,28 @@
             <div id="main-menu" class="main-menu">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="#"><i class="menu-icon fa fa-laptop"></i>Inicio</a>
+                        <a href="{% url 'libro:index' %}"><i class="menu-icon fa fa-laptop"></i>Inicio</a>
                     </li>
                     
                    
                     <li class="menu-item-has-children dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
                                 class="menu-icon fa fa-users"></i>Usuarios</a>
+                                
                         <ul class="sub-menu children dropdown-menu">
+                            {% if request.user.is_staff %}
                             <li><i class="fa fa-table"></i><a href="{% url 'usuario:List_prestamo'%}">Listado de Prestamo</a></li>
                             <li><i class="fa fa-table"></i><a href="{% url 'usuario:CreateUserANDListUser'%}">Listado Usuario</a></li>
                             <li><i class="fa fa-table"></i><a href="{% url 'libro:lista_activa'%}">Listado de reserva activa</a></li>
                             <li><i class="fa fa-table"></i><a href="{% url 'libro:lista__no_activa'%}">Listado de reserva inactiva</a></li>
+
+
+                            {% endif %}
+                           {% if not request.user.is_staff %}
+                            <li><i class="fa fa-table"></i><a href="{% url 'libro:reservation'%}"> Reservar  libro  </a></li>
+
+                            <li><i class="fa fa-table"></i><a href="{% url 'libro:lista__usuario_activa'%}">Tus reservas en espera....</a></li>
+                            {% endif %}
                                                         
                         </ul>
                     </li>
@@ -48,7 +58,9 @@
                        <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Autores</a>
                        <ul class="sub-menu children dropdown-menu">
                            <li><i class="fa fa-table"></i><a href="{% url 'libro:list_autor'%}">Listado de Autores</a></li>
+                           {% if request.user.is_staff %}
                            <li><i class="fa fa-table"></i><a href="{% url 'libro:create_autor'%}">Crear Autor</a></li>
+                           {% endif %}
                        </ul>
 
                     </li>
@@ -58,8 +70,12 @@
                          
                            
                            <li><i class="fa fa-table"></i><a href="{% url 'libro:list_book'%}">Listado de Libros</a></li>
+
+                           {% if request.user.is_staff %}
                            <li><i class="fa fa-table"></i><a href="{% url 'libro:create_book'%}">Crear Libro</a></li>
+                        {% endif %}
                        </ul>
+
                     </li> 
                     
                     
@@ -78,6 +94,8 @@
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
+
+             
             <div class="top-right">
                 <div class="header-menu">
                     <div class="user-area dropdown float-right">
@@ -85,14 +103,17 @@
                             <img class="user-avatar rounded-circle" src="{% static 'images/admin.png' %}" alt="User Avatar">
                         </a>
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa- user"></i>Perfil</a>
+                          {% if request.user.is_staff %}
                             <a class="nav-link" href="#"><i class="fa fa -cog"></i>Administración</a>
+                             {% endif %}
                             <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
                 </div>
             </div>
+
+           
         </header>
 
         <div class="content">

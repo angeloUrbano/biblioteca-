@@ -15,7 +15,7 @@ Biblioteca.dev | Prestamo
         <strong class="card-title">Prestamo</strong>
       </div>
       <div class="col-md-4">
-        <a href="#" class="btn btn-primary">Pagina Pincipal</a>
+        <a href="{% url 'libro:index'%}" class="btn btn-primary">Pagina Pincipal</a>
         
       </div>
     </div>
@@ -91,7 +91,7 @@ Biblioteca.dev | Prestamo
                 {{ form.as_p }}
             </div>
             <div class="modal-footer">
-                <button class="btn btn-danger" type="submit" >Cancelar</button>
+                
                 <button class="btn btn-primary" type="submit"
                     >Confirmar</button>
             </div>

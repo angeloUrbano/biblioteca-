@@ -4,7 +4,7 @@ from django.views.generic import View , DetailView ,TemplateView , ListView , Up
 from libro.forms import Create_Book_form , Autor_Create_form , PrestamoForm , reservationForm
 from usuario.forms import UserCreateForm 
 from libro.models import Libro , Autor  , Prestamo  , reservation
-from usuario.models import Profile
+from usuario.models import Profile , datos_prestamo_manejado_por_staff
 from django.core.paginator import Paginator
 
 
@@ -15,7 +15,7 @@ from django.core.mail import send_mail
 
 
 class inicio(TemplateView):
-
+ 
 	template_name= "base.html"
 
 
@@ -180,7 +180,7 @@ class DeleteAutor(DeleteView):
 
 class Prestamo(DetailView):
 	model = Libro
-	second_model = Profile
+	second_model = datos_prestamo_manejado_por_staff
 	third_model = Prestamo
 	form_class= UserCreateForm
 	second_form_class= PrestamoForm
@@ -249,7 +249,7 @@ class Prestamo(DetailView):
 			
 		
 			var_person = self.second_model.objects.all().order_by('-create')[0]
-			tipo = Profile.objects.get(pk = var_person.id)
+			tipo = datos_prestamo_manejado_por_staff.objects.get(pk = var_person.id)
 			"""
 			in var tipo saving the object because i can't save an int for the relation fk
 			and thisis the shape salvando.libro_id.add(self.kwargs['pk'])  of save un 

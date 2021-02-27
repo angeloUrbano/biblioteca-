@@ -1,5 +1,5 @@
 from django import forms 
-from usuario.models import Profile 
+from usuario.models import Profile , datos_prestamo_manejado_por_staff
 
 from libro.models import  Prestamo
 
@@ -10,15 +10,16 @@ from libro.models import  Prestamo
 class UserCreateForm(forms.ModelForm):
 
 	class Meta:
-		model=Profile
+		model=datos_prestamo_manejado_por_staff
 
-		fields=('first_name' , 'last_name' , 'email' , 'phone_number' )
+		fields=('first_name' , 'last_name' , 'cedula' , 'email' , 'phone_number' )
 
 
 
 		labels={
 			'first_name':'nombre',
 			'last_name': 'Apellido',
+			'cedula': 'Cedula',
 			'email': 'Email',
 			'phone_number': 'Numero telefonico',
 			

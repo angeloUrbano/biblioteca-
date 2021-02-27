@@ -52,8 +52,9 @@ Biblioteca.dev | Listado de Autores
           <th>Titulo</th>
           <th>Cantidad de Libros</th>
           <th>Autor</th>
-          
+          {% if request.user.is_staff %}
           <th>Opciones</th>
+          {% endif  %}
         </tr>
       </thead>
 
@@ -70,22 +71,24 @@ Biblioteca.dev | Listado de Autores
 				<td>{{book.cantidad_existente}}</td>
 				<td>
 
-						{% for book in book.autor_id.all %}
+						{% for bok in book.autor_id.all %}
 
 
 
-							<li>{{book.nombre}}</li>
+							<li>{{bok.nombre}}</li>
 
 
 							</td>
 						{% endfor %}
+            {% if request.user.is_staff %}
 				<td>
 					<a href="{% url 'libro:prestamo' book.id %}" class="btn btn-success">Prestamo</a>
 					
 					<a href="{% url 'libro:update_book' book.id %}" class="btn btn-primary">Editar</a>
 					<a href="{% url 'libro:delete_book' book.id %}" class="btn btn-danger">Eliminar</a>
 
-				</td>		
+				</td>	
+        {% endif %}	
 
 			{% endfor %}
 
