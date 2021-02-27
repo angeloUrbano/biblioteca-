@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+{% block body %}
+
+
+
+
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-8">
+        <strong class="card-title">Listado de Libros</strong>
+      </div>
+      
+    </div>
+
+  </div>
+  <div class="table-stats order-table ov-h">
+    <table id="tabla_autores" class="table">
+      <thead>
+        <tr>
+          <th>Nombre Usuario</th>
+          <th>Apellido Usuario</th>
+          
+          
+          <th>Titulo</th>
+          <th>Cantidad de Libros</th>
+          <th>Autor</th>
+          
+          
+        </tr>
+      </thead>
+
+
+      <tbody>
+        {% if object_list %}
+		{% for  reservacion in object_list %}
+			
+			<tr>
+				
+
+				<td>{{reservacion.user_id}}</td>
+        <td>{{reservacion.user_id.last_name}}</td>
+				<td>{{reservacion.titulo_libro}}</td>
+				<td>{{reservacion.cantidad_solicitada}}</td>
+        <td>{{reservacion.autor_libro}}</td>
+				
+				
+					
+
+			{% endfor %}
+
+
+			{% else %}
+
+					<h1> No hay reserva!</h1>
+
+			{% endif %}	
+
+
+          </tr>
+
+          
+
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+</div>
+</div>
+
+                      <div  class="col-md-12 col-lg12 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 float-right">
+                        {% if books.has_previous %}
+                        <p class="text-white-75 font-weight-light mb-5"></p>
+                        <a class="btn btn-primary btn-xl js-scroll-trigger" href="?page={{books.previous_page_number}}"> Pagina Anterior</a>
+                        
+                        {% endif %}
+                        
+                    </div>
+                    </div>
+
+
+                    <div  class="col-md-12 col-lg12 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xs-6 float-right">
+                        {% if books.has_next %}
+                        <p class="text-white-75 font-weight-light mb-5"></p>
+                        <a class="btn btn-primary btn-xl js-scroll-trigger" href="?page={{books.next_page_number}}">Siguiente Pagina</a>
+                        
+                        {% endif %}
+                    </div>
+                    </div>
+                  
+
+
+
+
+
+{% endblock body %}
+
+
+                  
+
+
+
+{% block extrajs %}
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'js/libro/libro.js' %}"></script>
+{% endblock extrajs %}

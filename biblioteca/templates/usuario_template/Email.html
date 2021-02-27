@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Biblioteca.dev | Listado de Autores
+{% endblock titulo %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+{% block body %}
+
+
+
+
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-8">
+        <strong class="card-title">Datos de reserva</strong>
+      </div>
+      
+    </div>
+
+  </div>
+  <div class="table-stats order-table ov-h">
+    <table id="tabla_autores" class="table">
+      <thead>
+        <tr>
+          <th>Nombre Usuario</th>
+          <th>Apellido Usuario</th>
+          <th>Email</th>
+          <th>telefono</th>
+
+          <th>Titulo</th>
+          <th>Cantidad de Libros</th>
+          <th>Autor</th>
+          
+          
+        </tr>
+      </thead>
+
+
+      <tbody>
+       
+			
+			<tr>
+				
+
+				<td>{{object.user_id}}</td>
+        <td>{{object.user_id.last_name}}</td>
+        <td>{{object.user_id.email}}</td>
+        <td>{{object.user_id.phone_number}}</td>
+
+				<td>{{object.titulo_libro}}</td>
+				<td>{{object.cantidad_solicitada}}</td>
+				<td>{{object.autor_libro}}</td>
+				
+				
+
+
+          </tr>
+
+          
+
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+</div>
+</div>
+<p></p>
+<p></p>
+<p></p>
+
+<div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-6 pt-3 pb-3" id="profile-box">
+                <h4 class="mb-4">Enviar mensaje de confirmacion!</h4>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <input
+                            class="form-control"
+                            type="text"
+                            name="asunto"
+                            placeholder="Asunto"
+                        >
+                        
+
+                    </div>
+
+
+
+                    
+
+
+
+                  <div class="form-group">
+                        <textarea
+                            class="form-control"
+                            type="text"
+                            name="mensaje"
+                            placeholder="Mensaje"
+                        ></textarea>
+                        
+
+                    </div>
+
+                    
+                    <button type="submit" class="btn btn-primary btn-block mt-5">
+                    Enviar!</button>
+                    <a href="{% url 'libro:index'%} " class="btn btn-danger btn-block mt-5">cancelar!</a>
+                </form>
+            </div>
+        </div>
+    </div> 
+
+
+
+
+
+
+{% endblock body %}
+
+
+                  
+
+
+
+{% block extrajs %}
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'js/libro/libro.js' %}"></script>
+{% endblock extrajs %}
