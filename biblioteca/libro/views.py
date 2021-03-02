@@ -6,6 +6,7 @@ from usuario.forms import UserCreateForm
 from libro.models import Libro , Autor  , Prestamo  , reservation
 from usuario.models import Profile , datos_prestamo_manejado_por_staff
 from django.core.paginator import Paginator
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from django.conf import settings
@@ -262,9 +263,15 @@ class Prestamo(DetailView):
 			return redirect('usuario:List_prestamo')	
 			#data={ 'libro_id':profile.libro_id.set(self.kwargs['pk']), 'user_id':profile.user_id}
 			#salvando=  self.third_model.objects.create(profile)
-		else:
 
-			return redirect('libro:list_book')	
+		else:
+			#import pdb;pdb.set_trace()
+			
+
+			amount_count= self.model.objects.get(id = self.kwargs['pk'] )
+
+			return render(request , 'usuario_template/prestamo.html' ,  {'form':form , 'object': amount_count} )	
+		
 
 
 class Create_request_Book(CreateView):

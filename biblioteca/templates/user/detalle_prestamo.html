@@ -23,7 +23,7 @@ Biblioteca.dev | Listado de Prestamos
         <strong class="card-title">Datos del cliente!</strong>
       </div>
       <div class="col-md-4">
-        <a href="#" class="btn btn-primary">Pagina Pincipal</a>
+        <a href="{% url 'libro:index'%}" class="btn btn-primary">Pagina Pincipal</a>
         
       </div>
     </div>
@@ -37,9 +37,10 @@ Biblioteca.dev | Listado de Prestamos
           <th>Apellido </th>
            <th>Email </th>
            <th>Telefono</th>
+
           
-          <th>Creado</th>
-          <th>Modificado</th>
+          <th>Cedula</th>
+          
         </tr>
       </thead>
 
@@ -55,8 +56,8 @@ Biblioteca.dev | Listado de Prestamos
         <td>{{object.user_id.email}}</td>
         <td>{{object.user_id.phone_number}}</td>
         
-        <td>{{object.user_id.create}}</td>
-        <td>{{object.user_id.modified}}</td>
+        <td>{{object.user_id.cedula}}</td>
+        
       
 
           </tr>
@@ -78,7 +79,7 @@ Biblioteca.dev | Listado de Prestamos
         <tr>
           <th>Titulo de libro </th>
           <th>Cantidad </th>
-          <th>Cantidad </th>
+          
            
         </tr>
       </thead>
@@ -91,7 +92,7 @@ Biblioteca.dev | Listado de Prestamos
         {% for book in object.libro_id.all%}
 
             <td>{{book}}</td>
-            <td>{{book.create}}</td>
+           
             <td>{{book.cantidad_existente}}</td>
 
 

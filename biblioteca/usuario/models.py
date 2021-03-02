@@ -21,7 +21,7 @@ class datos_prestamo_manejado_por_staff(models.Model):
 	
 	first_name= models.CharField(max_length=50)
 	last_name= models.CharField( max_length=50)
-	cedula = models.IntegerField()
+	cedula = models.IntegerField(unique=True)
 	email = models.CharField(max_length=70)
 	phone_number= models.CharField(max_length=20 , blank=True)
 	create = models.DateTimeField(auto_now_add=True)
